@@ -1,0 +1,152 @@
+/* 出席調查區塊 */
+.survey-section {
+  background: linear-gradient(
+    160deg,
+    #fdf5ec 0%,
+    #f5e6d3 40%,
+    #edd5d5 75%,
+    #f5e6d3 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.survey-section::before {
+  content: "";
+  position: absolute;
+  right: -80px;
+  bottom: -80px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 1px solid rgba(139, 0, 0, 0.1);
+  pointer-events: none;
+}
+
+.survey-container {
+  max-width: 580px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 卡片 */
+.survey-card {
+  background: rgba(255, 255, 255, 0.6) !important;
+  border: 1px solid rgba(139, 0, 0, 0.15) !important;
+  border-radius: 20px !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 28px rgba(139, 0, 0, 0.07) !important;
+}
+
+/* 已投票徽章 */
+.voted-badge {
+  background: rgba(139, 0, 0, 0.06);
+  border: 1px solid rgba(139, 0, 0, 0.15);
+  border-radius: 40px;
+  padding: 0.5rem 1.4rem;
+  display: inline-block;
+  color: var(--red-deep);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+}
+
+/* 投票按鈕 */
+.survey-btn {
+  min-width: 130px;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em;
+  border: 2px solid transparent !important;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s !important;
+}
+.survey-btn:not(.q-btn--disable):hover {
+  transform: translateY(-3px);
+}
+
+.survey-btn :deep(.q-btn__content) {
+  align-items: center;
+  line-height: 1;
+}
+
+.join-btn {
+  background: #e8f5e9 !important;
+  color: #2e7d32 !important;
+  border-color: #a5d6a7 !important;
+}
+.join-btn.active,
+.join-btn:not(.q-btn--disable):hover {
+  background: #2e7d32 !important;
+  color: #fff !important;
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.3) !important;
+}
+
+.not-join-btn {
+  background: #fce4ec !important;
+  color: #b71c1c !important;
+  border-color: #ef9a9a !important;
+}
+.not-join-btn.active,
+.not-join-btn:not(.q-btn--disable):hover {
+  background: #b71c1c !important;
+  color: #fff !important;
+  box-shadow: 0 6px 20px rgba(183, 28, 28, 0.3) !important;
+}
+
+/* 統計數字 */
+.survey-stats {
+  border-top: 1px solid rgba(139, 0, 0, 0.1);
+  padding-top: 1rem;
+}
+
+.stat-item {
+  /* min-width: 100px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 數字與文字水平置中 */
+  min-width: 80px;
+}
+
+.stat-number {
+  /* font-size: clamp(2.4rem, 6vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1; */
+  line-height: 1;
+  min-height: 1.5em;
+}
+.join-num {
+  color: #2e7d32;
+}
+.not-join-num {
+  color: #b71c1c;
+}
+
+.stat-label {
+  font-size: 0.88rem;
+  color: var(--text-medium);
+  letter-spacing: 0.08em;
+  margin-top: 0.4rem;
+}
+
+.stat-divider {
+  width: 1px;
+  background: rgba(139, 0, 0, 0.12);
+  align-self: stretch;
+}
+
+@media (max-width: 599px) {
+  .survey-card {
+    padding: 1.25rem !important;
+  }
+  .survey-btn {
+    min-width: 100px;
+    font-size: 0.95rem !important;
+  }
+  .stat-number {
+    font-size: 2.6rem;
+  }
+  .stat-label {
+    font-size: 0.8rem;
+  }
+}

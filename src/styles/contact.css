@@ -1,0 +1,59 @@
+/* 主辦團隊區塊 */
+.contact-section {
+  background: linear-gradient(180deg, #ffffff 0%, #fdf5ec 100%);
+}
+.contact-container {
+  max-width: 800px;
+}
+
+/* 主辦人卡片 */
+.organizer-card {
+  background: linear-gradient(160deg, #fffaf5 0%, #fdf0e0 100%) !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(212, 165, 116, 0.25) !important;
+  box-shadow: 0 4px 20px rgba(139, 0, 0, 0.06) !important;
+  transition: transform 0.35s, box-shadow 0.35s;
+  cursor: default;
+}
+.organizer-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(139, 0, 0, 0.13) !important;
+}
+
+/* 圓形照片外框 */
+.photo-ring {
+  box-shadow: 0 0 0 2px var(--coffee-medium);
+  transition: box-shadow 0.3s;
+}
+.organizer-card:hover .photo-ring {
+  box-shadow: 0 0 0 2px var(--red-dark);
+}
+
+/* 響應式頭像：寬高都用 vw 確保永遠是正圓 */
+.organizer-card .q-avatar {
+  width: min(110px, 28vw) !important;
+  height: min(110px, 28vw) !important;
+}
+
+.organizer-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.4s;
+}
+.organizer-card:hover .organizer-photo {
+  transform: scale(1.08);
+}
+
+/* 姓名與標籤 */
+.organizer-name {
+  font-size: clamp(0.8rem, 2.5vw, 1.1rem);
+  font-weight: 900;
+  color: var(--text-dark);
+  letter-spacing: 0.1em;
+}
+.organizer-tag {
+  letter-spacing: 0.12em;
+  font-size: clamp(0.55rem, 1.6vw, 0.72rem) !important;
+}

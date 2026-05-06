@@ -1,0 +1,93 @@
+<template>
+  <section class="hero" id="hero">
+    <!-- 照片輪播背景（gradient 立即顯示，照片淡入） -->
+    <div class="hero-bg">
+      <transition name="hero-fade">
+        <img
+          :key="currentIndex"
+          :src="heroPhotos[currentIndex]"
+          class="hero-bg-img"
+          alt=""
+        />
+      </transition>
+      <div class="hero-overlay"></div>
+    </div>
+
+    <!-- 主要文字 -->
+    <div class="hero-content">
+      <div class="year-tag">2026</div>
+      <p class="pre-title">♪ 生日應援 ♪</p>
+      <h1 class="main-title">生日快樂</h1>
+      <div class="name-row">
+        <div class="name-line"></div>
+        <h2 class="artist-name">陳楚生</h2>
+        <div class="name-line"></div>
+      </div>
+      <p class="tagline">用音樂書寫每個感動的瞬間</p>
+    </div>
+
+    <!-- 咖啡色點導航（hover 預覽，click 鎖定） -->
+    <div class="photo-dots">
+      <button
+        v-for="(_, idx) in heroPhotos"
+        :key="idx"
+        class="photo-dot"
+        :class="{ active: idx === currentIndex }"
+        @mouseenter="hoverTo(idx)"
+        @mouseleave="resumeAuto"
+        @click="jumpTo(idx)"
+        :aria-label="`切換到第 ${idx + 1} 張`"
+      ></button>
+    </div>
+
+    <!-- 向下捲動指示 -->
+    <div class="scroll-indicator" aria-hidden="true">
+      <div class="scroll-dot"></div>
+    </div>
+  </section>
+</template>
+
+<script setup>
+import { ref, onMounted, onUnmounted } from "vue";
+
+/**
+ * eager 加載 image 資料夾全部 15 張照片。
+ * 依檔名排序確保每次順序一致。
+ */
+const imageModules = import.meta.glob("../../image/*.jpg", { eager: true });
+const heroPhotos = Object.keys(imageModules)
+  .sort()
+  .map((k) => imageModules[k].default);
+
+const currentIndex = ref(0);
+let timer = null;
+let paused = false;
+
+/** 跳至指定索引 */
+const jumpTo = (idx) => {
+  currentIndex.value = idx;
+};
+
+/** hover 預覽：暫停自動輪播並切換 */
+const hoverTo = (idx) => {
+  paused = true;
+  currentIndex.value = idx;
+};
+
+/** 滑鼠離開：恢復自動輪播 */
+const resumeAuto = () => {
+  paused = false;
+};
+
+onMounted(() => {
+  timer = setInterval(() => {
+    if (!paused) {
+      currentIndex.value = (currentIndex.value + 1) % heroPhotos.length;
+    }
+  }, 4000);
+});
+
+onUnmounted(() => {
+  clearInterval(timer);
+});
+</script>

@@ -1,0 +1,98 @@
+/* 應援禮包區塊 */
+.gift-section {
+  background: linear-gradient(180deg, #fdf5ec 0%, #f5e6d3 50%, #fdf5ec 100%);
+}
+.gift-container {
+  max-width: 960px;
+}
+
+/* 禮包卡片 */
+.gift-card {
+  border-radius: 20px !important;
+  border: 1px solid rgba(212, 165, 116, 0.2) !important;
+  transition: transform 0.35s, box-shadow 0.35s;
+  position: relative;
+  overflow: hidden;
+}
+.gift-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(139, 0, 0, 0.12) !important;
+}
+
+.gift-photo-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(62, 39, 35, 0.15) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+.gift-info {
+  border-top: 1px solid rgba(212, 165, 116, 0.18);
+}
+.gift-name {
+  font-size: clamp(1rem, 1.8vw, 1.05rem);
+  font-weight: 900;
+  color: var(--text-dark);
+  letter-spacing: 0.08em;
+}
+
+/* 扭蛋機區塊 */
+.gacha-block {
+  border-radius: 20px !important;
+  border: 1px solid rgba(212, 165, 116, 0.2) !important;
+}
+.gacha-title {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--red-dark);
+  letter-spacing: 0.18em;
+}
+.gacha-deco {
+  color: var(--coffee-medium);
+  font-size: 0.6rem;
+}
+
+/* q-markup-table 表頭覆寫 */
+.gacha-table thead tr {
+  background: linear-gradient(90deg, var(--red-dark) 0%, var(--red-primary) 100%);
+}
+.gacha-table thead th {
+  color: #ffffff !important;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: clamp(0.4rem, 1.5vw, 1rem) clamp(0.5rem, 2.5vw, 2rem) !important;
+  font-size: clamp(0.72rem, 1.8vw, 0.9rem);
+}
+.gacha-table tbody tr:hover td {
+  background: rgba(212, 165, 116, 0.1) !important;
+}
+.gacha-table td {
+  padding: clamp(0.35rem, 1.2vw, 0.9rem) clamp(0.4rem, 2vw, 2rem) !important;
+  letter-spacing: 0.04em;
+  font-size: clamp(0.72rem, 1.8vw, 0.95rem);
+}
+
+/* 賞別徽章 */
+.grade-badge {
+  display: inline-block;
+  padding: 0.2rem 0.85rem;
+  border-radius: 20px;
+  font-weight: 900;
+  font-size: 0.88rem;
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, var(--red-dark), var(--red-primary));
+  color: #ffffff;
+}
+.special-badge {
+  background: linear-gradient(135deg, #a0720a, #d4a574) !important;
+  box-shadow: 0 2px 8px rgba(212, 165, 116, 0.4);
+}
+
+.item-name {
+  color: var(--text-dark);
+}
+.item-qty {
+  color: var(--coffee-dark);
+  font-size: 0.95rem;
+}

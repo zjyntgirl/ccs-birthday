@@ -1,0 +1,50 @@
+/* 生日應援展區塊 */
+.event-info {
+  background: #ffffff;
+  border-top: 1px solid rgba(212, 165, 116, 0.2);
+}
+.event-container {
+  max-width: 900px;
+}
+
+/* 卡片 */
+.info-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px !important;
+  transition: transform 0.35s, box-shadow 0.35s;
+}
+.info-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(139, 0, 0, 0.1) !important;
+}
+
+.card-icon {
+  font-size: clamp(1.1rem, 4vw, 2.4rem);
+}
+.card-label {
+  color: var(--coffee-medium);
+  letter-spacing: 0.15em;
+  font-size: clamp(0.55rem, 1.6vw, 0.75rem);
+}
+.card-value {
+  font-size: clamp(0.65rem, 2vw, 1.15rem);
+  color: var(--text-dark);
+  line-height: 1.8;
+}
+
+/* 分隔裝飾 */
+.guitar-divider {
+  font-size: 1.3rem;
+}
+.divider-line {
+  flex: 1;
+  max-width: 120px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 165, 116, 0.5),
+    transparent
+  );
+}

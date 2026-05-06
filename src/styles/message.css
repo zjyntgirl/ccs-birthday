@@ -1,0 +1,183 @@
+/* 留言板區塊 */
+.message-section {
+  background: linear-gradient(
+    170deg,
+    #3e2723 0%,
+    #5d3a2e 35%,
+    #4a2c24 70%,
+    #3e2723 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.message-section::before {
+  content: '';
+  position: absolute;
+  left: -100px; top: -100px;
+  width: 350px; height: 350px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 165, 116, 0.1);
+  pointer-events: none;
+}
+
+.message-container {
+  max-width: 720px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 已留言提示徽章 */
+.posted-badge {
+  background: rgba(212, 165, 116, 0.12);
+  border: 1px solid rgba(212, 165, 116, 0.3);
+  border-radius: 40px;
+  padding: 0.45rem 1.2rem;
+  color: var(--coffee-medium);
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+}
+
+/* 輸入卡片 */
+.message-input-card {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(212, 165, 116, 0.25) !important;
+  border-radius: 16px !important;
+  backdrop-filter: blur(8px);
+}
+
+.message-field .q-field__control {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-radius: 8px !important;
+}
+.message-field .q-field__label,
+.message-field .q-field__native {
+  color: var(--coffee-light) !important;
+}
+.message-field .q-field__control:before {
+  border-color: rgba(212, 165, 116, 0.4) !important;
+}
+.message-field .q-field__control:hover:before {
+  border-color: var(--coffee-medium) !important;
+}
+
+/* 送出按鈕 */
+.submit-btn {
+  background: linear-gradient(135deg, var(--red-dark), var(--red-primary)) !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em;
+  height: 56px;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+}
+
+/* 輸入框統一高度 */
+.full-height-field { height: 56px; }
+.submit-btn:not(.q-btn--disable):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 0, 0, 0.4) !important;
+}
+
+/* 空狀態 */
+.message-empty {
+  color: rgba(212, 165, 116, 0.6);
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+}
+
+/* 留言卡片 */
+.message-item {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(212, 165, 116, 0.2) !important;
+  border-radius: 14px !important;
+  transition: background 0.2s;
+}
+.message-item:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 頭像 */
+.msg-avatar {
+  background: linear-gradient(135deg, var(--red-dark), var(--coffee-medium)) !important;
+  color: #fff !important;
+  font-weight: 900 !important;
+  font-size: 1.1rem !important;
+  flex-shrink: 0;
+}
+
+.msg-name {
+  font-weight: 700;
+  color: var(--coffee-light);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+}
+
+.msg-time {
+  font-size: 0.75rem;
+  color: rgba(212, 165, 116, 0.7);
+  letter-spacing: 0.04em;
+}
+
+.msg-content {
+  color: #ede0d4;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  letter-spacing: 0.04em;
+  word-break: break-all;
+}
+
+/* 刪除按鈕 */
+.delete-btn {
+  color: rgba(212, 165, 116, 0.4) !important;
+  transition: color 0.2s !important;
+}
+.delete-btn:hover {
+  color: #ef5350 !important;
+}
+
+/* 自己的留言高亮邊框 */
+.my-message {
+  border-color: rgba(212, 165, 116, 0.55) !important;
+  background: rgba(212, 165, 116, 0.08) !important;
+}
+
+/* 顯示更多 / 收起按鈕 */
+.show-more-btn {
+  color: var(--coffee-medium) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em;
+  border: 1px solid rgba(212, 165, 116, 0.3) !important;
+  border-radius: 40px !important;
+  padding: 0.35rem 1.4rem !important;
+  transition: background 0.2s !important;
+}
+.show-more-btn:hover {
+  background: rgba(212, 165, 116, 0.1) !important;
+}
+
+/* 刪除確認對話框 */
+.delete-dialog {
+  border-radius: 16px !important;
+  min-width: 260px;
+}
+.cancel-btn {
+  color: var(--text-medium) !important;
+  border: 1px solid var(--coffee-medium) !important;
+  padding: 0.3rem 1.4rem !important;
+}
+.confirm-delete-btn {
+  background: #b71c1c !important;
+  color: #fff !important;
+  padding: 0.3rem 1.4rem !important;
+}
+
+@media (max-width: 599px) {
+.message-input-card { padding: 1rem !important; }
+  .submit-btn         { height: 48px; }
+  .full-height-field  { height: 48px; }
+}
+
+/* 留言進場動畫 */
+.msg-fade-enter-active { transition: all 0.35s ease; }
+.msg-fade-enter-from   { opacity: 0; transform: translateY(-10px); }

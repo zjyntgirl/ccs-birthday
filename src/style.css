@@ -1,0 +1,31 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --red-deep:    #5D0000;
+  --red-dark:    #8B0000;
+  --red-primary: #B22222;
+  --red-light:   #C0392B;
+  --coffee-dark:    #8B6355;
+  --coffee-medium:  #D4A574;
+  --coffee-light:   #F5E6D3;
+  --coffee-lightest:#FDF5EC;
+  --text-dark:   #3E2723;
+  --text-light:  #FDF5EC;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Noto Serif TC', '思源宋體', serif;
+  background-color: var(--coffee-lightest);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}

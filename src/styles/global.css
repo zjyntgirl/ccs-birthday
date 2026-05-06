@@ -1,0 +1,77 @@
+/* Quasar 已包含 CSS reset，這裡只補充專案需要的全域設定 */
+:root {
+  --red-deep:        #5D0000;
+  --red-dark:        #8B0000;
+  --red-primary:     #C0392B;
+  --coffee-dark:     #8B6355;
+  --coffee-medium:   #D4A574;
+  --coffee-light:    #F5E6D3;
+  --coffee-lightest: #FDF5EC;
+  --white:           #FFFFFF;
+  --text-dark:       #3E2723;
+  --text-medium:     #6D4C41;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Serif TC', '思源宋體', serif;
+  overflow-x: hidden;
+  padding-top: 64px; /* 固定導覽列高度補償 */
+}
+
+/* Quasar 字體回退：讓 Quasar 的 typography class 也使用 Noto Serif */
+.q-field__native,
+.q-field__prefix,
+.q-field__suffix,
+.q-field__input {
+  font-family: 'Noto Serif TC', serif;
+}
+
+/* ── 共用區塊標題 ──────────────────────── */
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 900;
+  color: var(--red-dark);
+  letter-spacing: 0.15em;
+}
+.section-title--light { color: var(--coffee-light); }
+
+/* 共用副標題 */
+.section-subtitle {
+  color: var(--text-medium);
+  letter-spacing: 0.08em;
+  font-size: 1rem;
+  margin: 0;
+}
+.section-subtitle--light { color: var(--coffee-medium); }
+
+/* 共用區塊圖示（漂浮動畫） */
+.section-icon {
+  font-size: 3.5rem;
+  display: block;
+  animation: iconFloat 2.5s ease-in-out infinite alternate;
+}
+@keyframes iconFloat {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-8px); }
+}
+
+/* 共用標題底線 */
+.title-bar {
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--red-dark), var(--coffee-medium));
+  border-radius: 2px;
+}
+
+/* 卡片頂部紅咖漸層線（需搭配 position:relative; overflow:hidden） */
+.card-accent::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--red-dark), var(--coffee-medium), var(--red-dark));
+  z-index: 1;
+}
