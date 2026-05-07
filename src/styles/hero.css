@@ -1,7 +1,7 @@
 /* 英雄區 - 漸層立即顯示，照片在上方淡入 */
 .hero {
   position: relative;
-  min-height: 82vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
