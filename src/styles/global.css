@@ -1,21 +1,23 @@
 /* Quasar 已包含 CSS reset，這裡只補充專案需要的全域設定 */
 :root {
-  --red-deep:        #5D0000;
-  --red-dark:        #8B0000;
-  --red-primary:     #C0392B;
-  --coffee-dark:     #8B6355;
-  --coffee-medium:   #D4A574;
-  --coffee-light:    #F5E6D3;
-  --coffee-lightest: #FDF5EC;
-  --white:           #FFFFFF;
-  --text-dark:       #3E2723;
-  --text-medium:     #6D4C41;
+  --red-deep: #5d0000;
+  --red-dark: #8b0000;
+  --red-primary: #c0392b;
+  --coffee-dark: #8b6355;
+  --coffee-medium: #d4a574;
+  --coffee-light: #f5e6d3;
+  --coffee-lightest: #fdf5ec;
+  --white: #ffffff;
+  --text-dark: #3e2723;
+  --text-medium: #6d4c41;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-  font-family: 'Noto Serif TC', '思源宋體', serif;
+  font-family: "Noto Serif TC", "思源宋體", serif;
   overflow-x: hidden;
   padding-top: 64px; /* 固定導覽列高度補償 */
 }
@@ -25,7 +27,7 @@ body {
 .q-field__prefix,
 .q-field__suffix,
 .q-field__input {
-  font-family: 'Noto Serif TC', serif;
+  font-family: "Noto Serif TC", serif;
 }
 
 /* ── 共用區塊標題 ──────────────────────── */
@@ -35,7 +37,9 @@ body {
   color: var(--red-dark);
   letter-spacing: 0.15em;
 }
-.section-title--light { color: var(--coffee-light); }
+.section-title--light {
+  color: var(--coffee-light);
+}
 
 /* 共用副標題 */
 .section-subtitle {
@@ -44,7 +48,9 @@ body {
   font-size: 1rem;
   margin: 0;
 }
-.section-subtitle--light { color: var(--coffee-medium); }
+.section-subtitle--light {
+  color: var(--coffee-medium);
+}
 
 /* 共用區塊圖示（漂浮動畫） */
 .section-icon {
@@ -53,8 +59,12 @@ body {
   animation: iconFloat 2.5s ease-in-out infinite alternate;
 }
 @keyframes iconFloat {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-8px); }
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-8px);
+  }
 }
 
 /* 共用標題底線 */
@@ -68,10 +78,17 @@ body {
 
 /* 卡片頂部紅咖漸層線（需搭配 position:relative; overflow:hidden） */
 .card-accent::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--red-dark), var(--coffee-medium), var(--red-dark));
+  background: linear-gradient(
+    90deg,
+    var(--red-dark),
+    var(--coffee-medium),
+    var(--red-dark)
+  );
   z-index: 1;
 }

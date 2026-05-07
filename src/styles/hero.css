@@ -8,16 +8,17 @@
   justify-content: center;
   overflow: hidden;
   padding: 80px 2rem 2rem;
+  touch-action: pan-y;
   text-align: center;
   /* 立即顯示的漸層背景，不等照片載入 */
   background: linear-gradient(
     155deg,
-    #5D0000  0%,
-    #8B0000 28%,
-    #A8312D 50%,
-    #C8875A 72%,
-    #D4A574 88%,
-    #F5E6D3 100%
+    #5d0000 0%,
+    #8b0000 28%,
+    #a8312d 50%,
+    #c8875a 72%,
+    #d4a574 88%,
+    #f5e6d3 100%
   );
 }
 
@@ -43,8 +44,8 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(62, 39, 35, 0.50) 0%,
-    rgba(62, 39, 35, 0.30) 38%,
+    rgba(62, 39, 35, 0.5) 0%,
+    rgba(62, 39, 35, 0.3) 38%,
     rgba(62, 39, 35, 0.45) 68%,
     rgba(62, 39, 35, 0.75) 100%
   );
@@ -60,7 +61,9 @@
   height: 100%;
 }
 .hero-fade-enter-from,
-.hero-fade-leave-to { opacity: 0; }
+.hero-fade-leave-to {
+  opacity: 0;
+}
 
 /* 主要文字區 */
 .hero-content {
@@ -71,15 +74,21 @@
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(28px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .year-tag {
   display: inline-block;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #FDF5EC;
+  color: #fdf5ec;
   font-size: 0.82rem;
   letter-spacing: 0.4em;
   padding: 0.3rem 1.4rem;
@@ -88,7 +97,7 @@
 }
 
 .pre-title {
-  color: #D4A574;
+  color: #d4a574;
   font-size: 1.05rem;
   letter-spacing: 0.22em;
   margin-bottom: 0.8rem;
@@ -97,7 +106,7 @@
 .main-title {
   font-size: clamp(3.5rem, 10vw, 8rem);
   font-weight: 900;
-  color: #FFFFFF;
+  color: #ffffff;
   text-shadow:
     0 0 40px rgba(212, 165, 116, 0.35),
     0 4px 24px rgba(0, 0, 0, 0.55);
@@ -118,13 +127,18 @@
   flex: 1;
   max-width: 90px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(212, 165, 116, 0.75), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 165, 116, 0.75),
+    transparent
+  );
 }
 
 .artist-name {
   font-size: clamp(2rem, 6vw, 4rem);
   font-weight: 900;
-  color: #D4A574;
+  color: #d4a574;
   text-shadow:
     0 0 25px rgba(212, 165, 116, 0.45),
     0 2px 14px rgba(0, 0, 0, 0.5);
@@ -136,6 +150,46 @@
   font-size: 1rem;
   letter-spacing: 0.14em;
   font-style: italic;
+}
+
+/* 左右箭頭按鈕（電腦版） */
+.hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-size: 2.4rem;
+  line-height: 1;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.25s,
+    transform 0.25s;
+  backdrop-filter: blur(4px);
+}
+.hero-arrow:hover {
+  background: rgba(212, 165, 116, 0.45);
+  transform: translateY(-50%) scale(1.1);
+}
+.hero-arrow--prev {
+  left: 1.5rem;
+}
+.hero-arrow--next {
+  right: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .hero-arrow {
+    display: none;
+  }
 }
 
 /* 咖啡色點導航 */
@@ -166,7 +220,7 @@
 .photo-dot.active {
   width: 28px;
   border-radius: 4px;
-  background: #D4A574;
+  background: #d4a574;
   box-shadow: 0 0 8px rgba(212, 165, 116, 0.5);
 }
 
@@ -188,13 +242,27 @@
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50%       { transform: translateX(-50%) translateY(10px); }
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(10px);
+  }
 }
 
 @media (max-width: 600px) {
-  .photo-dots { gap: 6px; }
-  .photo-dot  { width: 6px; height: 6px; }
-  .photo-dot.active { width: 20px; }
-  .tagline    { font-size: 0.88rem; }
+  .photo-dots {
+    gap: 6px;
+  }
+  .photo-dot {
+    width: 6px;
+    height: 6px;
+  }
+  .photo-dot.active {
+    width: 20px;
+  }
+  .tagline {
+    font-size: 0.88rem;
+  }
 }

@@ -12,10 +12,12 @@
 }
 
 .message-section::before {
-  content: '';
+  content: "";
   position: absolute;
-  left: -100px; top: -100px;
-  width: 350px; height: 350px;
+  left: -100px;
+  top: -100px;
+  width: 350px;
+  height: 350px;
   border-radius: 50%;
   border: 1px solid rgba(212, 165, 116, 0.1);
   pointer-events: none;
@@ -63,17 +65,25 @@
 
 /* 送出按鈕 */
 .submit-btn {
-  background: linear-gradient(135deg, var(--red-dark), var(--red-primary)) !important;
+  background: linear-gradient(
+    135deg,
+    var(--red-dark),
+    var(--red-primary)
+  ) !important;
   color: #fff !important;
   border-radius: 8px !important;
   font-weight: 700 !important;
   letter-spacing: 0.1em;
   height: 56px;
-  transition: transform 0.2s, box-shadow 0.2s !important;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s !important;
 }
 
 /* 輸入框統一高度 */
-.full-height-field { height: 56px; }
+.full-height-field {
+  height: 56px;
+}
 .submit-btn:not(.q-btn--disable):hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(139, 0, 0, 0.4) !important;
@@ -99,7 +109,11 @@
 
 /* 頭像 */
 .msg-avatar {
-  background: linear-gradient(135deg, var(--red-dark), var(--coffee-medium)) !important;
+  background: linear-gradient(
+    135deg,
+    var(--red-dark),
+    var(--coffee-medium)
+  ) !important;
   color: #fff !important;
   font-weight: 900 !important;
   font-size: 1.1rem !important;
@@ -173,11 +187,22 @@
 }
 
 @media (max-width: 599px) {
-.message-input-card { padding: 1rem !important; }
-  .submit-btn         { height: 48px; }
-  .full-height-field  { height: 48px; }
+  .message-input-card {
+    padding: 1rem !important;
+  }
+  .submit-btn {
+    height: 48px;
+  }
+  .full-height-field {
+    height: 48px;
+  }
 }
 
 /* 留言進場動畫 */
-.msg-fade-enter-active { transition: all 0.35s ease; }
-.msg-fade-enter-from   { opacity: 0; transform: translateY(-10px); }
+.msg-fade-enter-active {
+  transition: all 0.35s ease;
+}
+.msg-fade-enter-from {
+  opacity: 0;
+  transform: translateY(-10px);
+}

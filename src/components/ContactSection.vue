@@ -6,11 +6,12 @@
         <div class="title-bar q-mx-auto"></div>
       </div>
 
-      <div class="row q-col-gutter-md justify-center">
+      <div class="row q-col-gutter-md justify-center" ref="cardsRef">
         <div
-          v-for="person in organizers"
+          v-for="(person, idx) in organizers"
           :key="person.name"
-          class="col-6 col-sm-4"
+          class="col-6 col-sm-4 card-wrapper"
+          :style="{ transitionDelay: idx * 80 + 'ms' }"
         >
           <q-card
             class="organizer-card text-center q-pt-xl q-pb-lg q-px-sm"
@@ -48,6 +49,11 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted } from "vue";
+
+const cardsRef = ref(null);
+let observer = null;
+
 /** 載入 person 資料夾六張照片，依檔名排序確保順序一致 */
 const personModules = import.meta.glob("../../person/*.jpg", { eager: true });
 const personPhotos = Object.keys(personModules)
@@ -63,4 +69,23 @@ const organizers = [
   { name: "暖月", photo: personPhotos[4] },
   { name: "喳喳", photo: personPhotos[5] },
 ];
+
+onMounted(() => {
+  observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 },
+  );
+  cardsRef.value
+    ?.querySelectorAll(".card-wrapper")
+    .forEach((el) => observer.observe(el));
+});
+
+onUnmounted(() => observer?.disconnect());
 </script>

@@ -1,5 +1,10 @@
 <template>
-  <section class="hero" id="hero">
+  <section
+    class="hero"
+    id="hero"
+    @touchstart="onTouchStart"
+    @touchend="onTouchEnd"
+  >
     <!-- 照片輪播背景（gradient 立即顯示，照片淡入） -->
     <div class="hero-bg">
       <transition name="hero-fade">
@@ -25,6 +30,22 @@
       </div>
       <p class="tagline">用音樂書寫每個感動的瞬間</p>
     </div>
+
+    <!-- 左右箭頭（電腦版顯示） -->
+    <button
+      class="hero-arrow hero-arrow--prev"
+      @click="prevPhoto"
+      aria-label="上一張"
+    >
+      &#8249;
+    </button>
+    <button
+      class="hero-arrow hero-arrow--next"
+      @click="nextPhoto"
+      aria-label="下一張"
+    >
+      &#8250;
+    </button>
 
     <!-- 咖啡色點導航（hover 預覽，click 鎖定） -->
     <div class="photo-dots">
@@ -62,6 +83,8 @@ const heroPhotos = Object.keys(imageModules)
 const currentIndex = ref(0);
 let timer = null;
 let paused = false;
+let touchStartX = 0;
+let touchStartY = 0;
 
 /** 跳至指定索引 */
 const jumpTo = (idx) => {
@@ -77,6 +100,40 @@ const hoverTo = (idx) => {
 /** 滑鼠離開：恢復自動輪播 */
 const resumeAuto = () => {
   paused = false;
+};
+
+/** 切換上一張 */
+const prevPhoto = () => {
+  currentIndex.value =
+    (currentIndex.value - 1 + heroPhotos.length) % heroPhotos.length;
+};
+
+/** 切換下一張 */
+const nextPhoto = () => {
+  currentIndex.value = (currentIndex.value + 1) % heroPhotos.length;
+};
+
+/** 記錄觸控起始座標 */
+const onTouchStart = (e) => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+};
+
+/**
+ * 觸控結束時判斷滑動方向：
+ * 水平位移需 > 30px 且大於垂直位移，才視為有效左右滑。
+ * 向左滑（負值）→ 下一張；向右滑（正值）→ 上一張。
+ */
+const onTouchEnd = (e) => {
+  const deltaX = e.changedTouches[0].clientX - touchStartX;
+  const deltaY = e.changedTouches[0].clientY - touchStartY;
+  if (Math.abs(deltaX) < 30 || Math.abs(deltaY) > Math.abs(deltaX)) return;
+  if (deltaX < 0) {
+    currentIndex.value = (currentIndex.value + 1) % heroPhotos.length;
+  } else {
+    currentIndex.value =
+      (currentIndex.value - 1 + heroPhotos.length) % heroPhotos.length;
+  }
 };
 
 onMounted(() => {

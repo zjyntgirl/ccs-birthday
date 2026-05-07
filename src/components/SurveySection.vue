@@ -18,7 +18,6 @@
         <!-- 投票按鈕 -->
         <div class="row justify-center q-gutter-xl q-mb-md">
           <q-btn
-            :disable="!!userVote"
             unelevated
             rounded
             size="lg"
@@ -29,7 +28,6 @@
             參加
           </q-btn>
           <q-btn
-            :disable="!!userVote"
             unelevated
             rounded
             size="lg"
@@ -79,16 +77,20 @@ const LOCAL_KEY = "ccs-survey-vote";
 let unsubscribe = null;
 
 /**
- * 執行投票，使用 localStorage 防止同裝置重複累加。
+ * 執行投票，點相同選項不動作，點不同選項則切換。
  * @param {'join'|'notJoin'} option - 投票選項
  */
 async function vote(option) {
-  if (userVote.value) return;
-  const update =
-    option === "join" ? { join: increment(1) } : { notJoin: increment(1) };
+  const prev = userVote.value;
+  if (prev === option) return;
+
+  const update = {};
+  if (prev) update[prev] = increment(-1);
+  update[option] = increment(1);
+
   await setDoc(SURVEY_DOC, update, { merge: true });
-  localStorage.setItem(LOCAL_KEY, option);
   userVote.value = option;
+  localStorage.setItem(LOCAL_KEY, option);
 }
 
 onMounted(async () => {

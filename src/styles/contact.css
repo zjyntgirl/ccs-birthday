@@ -6,13 +6,28 @@
   max-width: 800px;
 }
 
+/* 卡片進場動畫 */
+.card-wrapper {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+.card-wrapper.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* 主辦人卡片 */
 .organizer-card {
   background: linear-gradient(160deg, #fffaf5 0%, #fdf0e0 100%) !important;
   border-radius: 20px !important;
   border: 1px solid rgba(212, 165, 116, 0.25) !important;
   box-shadow: 0 4px 20px rgba(139, 0, 0, 0.06) !important;
-  transition: transform 0.35s, box-shadow 0.35s;
+  transition:
+    transform 0.35s,
+    box-shadow 0.35s;
   cursor: default;
 }
 .organizer-card:hover {

@@ -50,8 +50,12 @@
   animation: guitarGlow 3s ease-in-out infinite alternate !important;
 }
 @keyframes guitarGlow {
-  from { transform: scale(1) rotate(-3deg); }
-  to   { transform: scale(1.08) rotate(3deg); }
+  from {
+    transform: scale(1) rotate(-3deg);
+  }
+  to {
+    transform: scale(1.08) rotate(3deg);
+  }
 }
 
 /* q-card 覆寫 — 半透明毛玻璃效果 */
@@ -65,7 +69,7 @@
 
 .wish-line {
   color: var(--text-dark);
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 2.1;
   letter-spacing: 0.06em;
   margin: 0;

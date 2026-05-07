@@ -1,12 +1,12 @@
 <template>
   <section class="message-section q-py-xl" id="message-board">
-    <div
-      class="message-container q-px-md q-mx-auto"
-    >
+    <div class="message-container q-px-md q-mx-auto">
       <div class="text-center q-mb-xl">
         <h2 class="section-title section-title--light q-mb-sm">留言板</h2>
         <div class="title-bar q-mx-auto q-mb-md"></div>
-        <p class="section-subtitle section-subtitle--light">請留下對生哥的祝福吧！</p>
+        <p class="section-subtitle section-subtitle--light">
+          請留下對生哥的祝福吧！
+        </p>
       </div>
 
       <!-- 輸入區 -->
@@ -164,27 +164,35 @@ let unsubscribe = null;
 
 /**
  * 計算要顯示的留言清單：
- * 自己的留言固定置頂，後面接最新 4 則他人留言。
+ * 他人留言統一由新到舊排列；
+ * 未留言時顯示最新 3 則；已留言時自己置頂 + 最新 2 則他人留言。
  * showAll 為 true 時顯示全部。
  */
 const displayedMessages = computed(() => {
   const myId = localStorage.getItem(LOCAL_KEY);
   const myMsg = myId ? messages.value.find((m) => m.id === myId) : null;
-  const others = messages.value.filter((m) => m.id !== myId);
+  // 他人留言由新到舊（reverse 不影響原陣列，filter 已建立新陣列）
+  const others = messages.value.filter((m) => m.id !== myId).reverse();
 
   if (showAll.value) {
-    return myMsg ? [myMsg, ...others] : others;
+    return myMsg ? [myMsg, ...others] : messages.value.slice().reverse();
   }
 
-  const recentOthers = others.slice(-OTHERS_LIMIT);
-  return myMsg ? [myMsg, ...recentOthers] : recentOthers;
+  if (myMsg) {
+    return [myMsg, ...others.slice(0, OTHERS_LIMIT)];
+  }
+  return messages.value.slice(-3).reverse();
 });
 
-/** 超出預設顯示範圍的他人留言數 */
+/** 超出預設顯示範圍的留言數 */
 const hiddenCount = computed(() => {
   const myId = localStorage.getItem(LOCAL_KEY);
-  const othersCount = messages.value.filter((m) => m.id !== myId).length;
-  return Math.max(0, othersCount - OTHERS_LIMIT);
+  const myMsg = myId ? messages.value.find((m) => m.id === myId) : null;
+  if (myMsg) {
+    const othersCount = messages.value.filter((m) => m.id !== myId).length;
+    return Math.max(0, othersCount - OTHERS_LIMIT);
+  }
+  return Math.max(0, messages.value.length - 3);
 });
 
 /** 取暱稱第一個字作為頭像顯示 */

@@ -6,8 +6,13 @@
         <div class="title-bar q-mx-auto"></div>
       </div>
 
-      <div class="row q-col-gutter-lg justify-center q-mb-xl">
-        <div v-for="item in eventItems" :key="item.id" class="col-4">
+      <div class="row q-col-gutter-lg justify-center q-mb-xl" ref="cardsRef">
+        <div
+          v-for="(item, idx) in eventItems"
+          :key="item.id"
+          class="col-4 card-wrapper"
+          :style="{ transitionDelay: idx * 100 + 'ms' }"
+        >
           <q-card class="info-card card-accent full-height" flat bordered>
             <q-card-section class="text-center q-pa-xs">
               <div class="card-icon q-mb-md">{{ item.icon }}</div>
@@ -39,6 +44,11 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted } from "vue";
+
+const cardsRef = ref(null);
+let observer = null;
+
 /** 生日應援展卡片清單 */
 const eventItems = [
   {
@@ -60,4 +70,23 @@ const eventItems = [
     value: "陳楚生CCS<br>再就業女孩",
   },
 ];
+
+onMounted(() => {
+  observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 },
+  );
+  cardsRef.value
+    ?.querySelectorAll(".card-wrapper")
+    .forEach((el) => observer.observe(el));
+});
+
+onUnmounted(() => observer?.disconnect());
 </script>
