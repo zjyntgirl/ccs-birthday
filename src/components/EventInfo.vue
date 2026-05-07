@@ -16,8 +16,8 @@
           <q-card class="info-card card-accent full-height" flat bordered>
             <q-card-section class="text-center q-pa-xs">
               <!-- eslint-disable-next-line vue/no-v-html -->
-              <div class="card-icon q-mb-md" v-html="item.icon"></div>
-              <div class="card-label text-caption text-weight-bold q-mb-sm">
+              <div class="card-icon q-mt-sm q-mb-md" v-html="item.icon"></div>
+              <div class="card-label text-caption text-weight-bold q-mb-sm" style="margin-top: -8px">
                 {{ item.label }}
               </div>
               <!-- eslint-disable-next-line vue/no-v-html -->
@@ -30,15 +30,22 @@
         </div>
       </div>
 
-      <div
-        class="guitar-divider row items-center justify-center q-gutter-sm"
-        aria-hidden="true"
-      >
-        <span>🎸</span>
-        <div class="divider-line"></div>
-        <span>🎵</span>
-        <div class="divider-line"></div>
-        <span>🎸</span>
+      <!-- 詳細地址 -->
+      <div class="location-info-row q-mb-lg">
+        <div class="location-label">🏠 地址</div>
+        <div class="location-value">台北市信義區永吉路30巷158弄23號</div>
+      </div>
+
+      <!-- Google Maps -->
+      <div class="map-wrapper map-anim" ref="mapRef">
+        <iframe
+          src="https://maps.google.com/maps?q=25.04249,121.567815&z=15&output=embed"
+          class="location-map"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Wannaeat 好想吃甜點工作室位置"
+        ></iframe>
       </div>
     </div>
   </section>
@@ -48,6 +55,7 @@
 import { ref, onMounted, onUnmounted } from "vue";
 
 const cardsRef = ref(null);
+const mapRef = ref(null);
 let observer = null;
 
 /** 生日應援展卡片清單 */
@@ -87,7 +95,56 @@ onMounted(() => {
   cardsRef.value
     ?.querySelectorAll(".card-wrapper")
     .forEach((el) => observer.observe(el));
+  if (mapRef.value) observer.observe(mapRef.value);
 });
 
 onUnmounted(() => observer?.disconnect());
 </script>
+
+<style scoped>
+.location-info-row {
+  text-align: center;
+}
+.location-label {
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  color: var(--coffee-medium);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.location-value {
+  font-size: 1rem;
+  color: var(--text-dark);
+  letter-spacing: 0.06em;
+}
+
+.map-wrapper {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(139, 99, 85, 0.18);
+  box-shadow: 0 4px 20px rgba(62, 39, 35, 0.08);
+}
+
+.map-anim {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.map-anim.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.location-map {
+  width: 100%;
+  height: 180px;
+  border: none;
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .location-map {
+    height: 130px;
+  }
+}
+</style>

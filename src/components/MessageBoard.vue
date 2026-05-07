@@ -13,7 +13,7 @@
       <q-card class="message-input-card q-pa-lg q-mb-xl" flat>
         <!-- 已留言提示 -->
         <div v-if="hasPosted" class="posted-badge text-center q-mb-md">
-          你已留言 💌
+          已收到 💌
         </div>
 
         <div class="row q-col-gutter-sm">
@@ -79,6 +79,7 @@
               <div class="msg-content">{{ msg.content }}</div>
             </div>
             <q-btn
+              v-if="msg.id === myMessageId"
               flat
               round
               dense

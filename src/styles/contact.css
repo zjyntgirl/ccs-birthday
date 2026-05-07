@@ -1,6 +1,6 @@
 /* 主辦團隊區塊 */
 .contact-section {
-  background: linear-gradient(180deg, #ffffff 0%, #fdf5ec 100%);
+  background: linear-gradient(160deg, #fffaf5 0%, #fdf0e0 60%, #f5e6d3 100%);
 }
 .contact-container {
   max-width: 800px;

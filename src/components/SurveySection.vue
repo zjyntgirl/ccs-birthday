@@ -4,14 +4,14 @@
       <div class="text-center q-mb-xl">
         <h2 class="section-title q-mb-sm">出席調查</h2>
         <div class="title-bar q-mx-auto q-mb-md"></div>
-        <p class="section-subtitle">你會來參加陳楚生的生日活動嗎？</p>
+        <p class="section-subtitle">您會想來參加陳楚生的生日活動嗎？</p>
       </div>
 
       <q-card class="survey-card q-pa-lg" flat>
         <!-- 已投票提示 -->
         <div v-if="userVote" class="voted-badge text-center q-mb-lg">
           你已選擇：<strong>{{
-            userVote === "join" ? "參加" : "不參加"
+            userVote === "join" ? "參加 ｜ 歡迎入境 ❤️" : "不參加"
           }}</strong>
         </div>
 

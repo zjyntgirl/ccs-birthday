@@ -3,10 +3,10 @@
     <NavHeader />
     <HeroSection />
     <EventInfo />
-    <GiftSection />
+    <!-- <GiftSection /> -->
+    <SurveySection />
     <ContactSection />
     <WishSection />
-    <SurveySection />
     <MessageBoard />
     <footer class="site-footer">
       <div class="footer-inner">

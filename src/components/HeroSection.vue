@@ -28,7 +28,7 @@
         <h2 class="artist-name">陳楚生</h2>
         <div class="name-line"></div>
       </div>
-      <p class="tagline">用音樂書寫每個感動的瞬間</p>
+      <p class="tagline">DREAMS HAPPEN</p>
     </div>
 
     <!-- 左右箭頭（電腦版顯示） -->
@@ -69,22 +69,37 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 
-/**
- * eager 加載 image 資料夾全部 15 張照片。
- * 依檔名排序確保每次順序一致。
- */
+/** 依檔名排序載入全部照片 */
 const imageModules = import.meta.glob("../../image/*.jpg", { eager: true });
-const heroPhotos = Object.keys(imageModules)
+const allPhotos = Object.keys(imageModules)
   .sort()
   .map((k) => imageModules[k].default);
+
+/** 電腦版只顯示 1-1、1-2、1-8、1-9、2.jpg（index 0,1,7,8,9） */
+const DESKTOP_INDICES = [0, 1, 7, 8, 9];
+const desktopPhotos = DESKTOP_INDICES.map((i) => allPhotos[i]);
+
+const isDesktop = ref(window.innerWidth >= 600);
+
+/** 根據螢幕寬度決定輪播清單 */
+const heroPhotos = computed(() => (isDesktop.value ? desktopPhotos : allPhotos));
 
 const currentIndex = ref(0);
 let timer = null;
 let paused = false;
 let touchStartX = 0;
 let touchStartY = 0;
+
+/** 螢幕尺寸變更時更新 isDesktop 並重置索引 */
+const onResize = () => {
+  const nowDesktop = window.innerWidth >= 600;
+  if (nowDesktop !== isDesktop.value) {
+    isDesktop.value = nowDesktop;
+    currentIndex.value = 0;
+  }
+};
 
 /** 跳至指定索引 */
 const jumpTo = (idx) => {
@@ -105,12 +120,12 @@ const resumeAuto = () => {
 /** 切換上一張 */
 const prevPhoto = () => {
   currentIndex.value =
-    (currentIndex.value - 1 + heroPhotos.length) % heroPhotos.length;
+    (currentIndex.value - 1 + heroPhotos.value.length) % heroPhotos.value.length;
 };
 
 /** 切換下一張 */
 const nextPhoto = () => {
-  currentIndex.value = (currentIndex.value + 1) % heroPhotos.length;
+  currentIndex.value = (currentIndex.value + 1) % heroPhotos.value.length;
 };
 
 /** 記錄觸控起始座標 */
@@ -129,22 +144,24 @@ const onTouchEnd = (e) => {
   const deltaY = e.changedTouches[0].clientY - touchStartY;
   if (Math.abs(deltaX) < 30 || Math.abs(deltaY) > Math.abs(deltaX)) return;
   if (deltaX < 0) {
-    currentIndex.value = (currentIndex.value + 1) % heroPhotos.length;
+    currentIndex.value = (currentIndex.value + 1) % heroPhotos.value.length;
   } else {
     currentIndex.value =
-      (currentIndex.value - 1 + heroPhotos.length) % heroPhotos.length;
+      (currentIndex.value - 1 + heroPhotos.value.length) % heroPhotos.value.length;
   }
 };
 
 onMounted(() => {
+  window.addEventListener("resize", onResize);
   timer = setInterval(() => {
     if (!paused) {
-      currentIndex.value = (currentIndex.value + 1) % heroPhotos.length;
+      currentIndex.value = (currentIndex.value + 1) % heroPhotos.value.length;
     }
   }, 4000);
 });
 
 onUnmounted(() => {
   clearInterval(timer);
+  window.removeEventListener("resize", onResize);
 });
 </script>
