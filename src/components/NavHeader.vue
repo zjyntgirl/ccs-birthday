@@ -3,7 +3,7 @@
     <div class="row items-center justify-between q-px-lg q-mx-auto nav-inner">
       <a href="#hero" class="nav-logo row items-center q-gutter-xs">
         <span class="logo-mark">♪</span>
-        <span class="text-weight-bolder">陳楚生 2026 應援</span>
+        <span class="text-weight-bolder">陳楚生 2026 生日應援</span>
       </a>
 
       <button

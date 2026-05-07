@@ -73,6 +73,7 @@
   line-height: 2.1;
   letter-spacing: 0.06em;
   margin: 0;
+  opacity: 0;
 }
 .wish-line.para-end {
   margin-bottom: 1.5rem;
@@ -83,6 +84,34 @@
   color: var(--red-dark);
   text-shadow: 0 1px 8px rgba(139, 0, 0, 0.15);
   margin: 0.3rem 0;
+}
+
+/* 逐行淡入 */
+.wish-line.wish-animate {
+  animation: wishFadeIn 0.7s ease-out forwards;
+}
+
+/* 放大回彈（highlight 行出現後觸發一次） */
+.wish-line.wish-flash {
+  opacity: 1;
+  animation: wishFlash 0.65s ease-in-out both;
+}
+
+@keyframes wishFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes wishFlash {
+  0%   { opacity: 1; transform: scale(1); }
+  45%  { opacity: 1; transform: scale(1.18); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 .wish-signature {

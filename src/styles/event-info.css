@@ -47,6 +47,16 @@
   color: var(--text-dark);
   line-height: 1.8;
 }
+.card-value a {
+  color: var(--text-dark);
+  text-decoration: none;
+}
+.card-value a:hover {
+  text-decoration: underline;
+}
+.card-value a:active {
+  color: var(--red-dark);
+}
 
 /* 分隔裝飾 */
 .guitar-divider {

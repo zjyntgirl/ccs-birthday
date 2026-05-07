@@ -1,6 +1,6 @@
 <template>
   <section class="wish-section q-py-xl">
-    <div class="wish-container q-px-md q-mx-auto">
+    <div class="wish-container q-px-md q-mx-auto" ref="containerRef">
       <div class="text-center q-mb-xl">
         <h2 class="section-title q-mb-sm">致親愛的生哥</h2>
         <div class="title-bar q-mx-auto"></div>
@@ -12,7 +12,13 @@
             v-for="(line, index) in wishLines"
             :key="index"
             class="wish-line"
-            :class="{ highlight: line.highlight, 'para-end': line.paraEnd }"
+            :class="{
+              highlight: line.highlight,
+              'para-end': line.paraEnd,
+              'wish-animate': isVisible,
+              'wish-flash': flashActive && line.highlight,
+            }"
+            :style="isVisible ? { animationDelay: `${index * 0.15}s` } : {}"
           >
             {{ line.text }}
           </p>
@@ -23,6 +29,35 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted } from "vue";
+
+const isVisible = ref(false);
+const flashActive = ref(false);
+const containerRef = ref(null);
+let observer = null;
+
+onMounted(() => {
+  observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        isVisible.value = true;
+        observer.disconnect();
+        /** 等 highlight 行（index 15）淡入完畢後觸發閃爍 */
+        const highlightIndex = wishLines.findIndex((l) => l.highlight);
+        setTimeout(() => {
+          flashActive.value = true;
+        }, highlightIndex * 150 + 800);
+      }
+    },
+    { threshold: 0.15 }
+  );
+  if (containerRef.value) observer.observe(containerRef.value);
+});
+
+onUnmounted(() => {
+  observer?.disconnect();
+});
+
 /** 祝福語文字清單，highlight 標記大字強調行，paraEnd 標記段落結尾以增加間距 */
 const wishLines = [
   { text: "每一座城市", highlight: false },
