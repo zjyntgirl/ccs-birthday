@@ -21,7 +21,6 @@
     <!-- 主要文字 -->
     <div class="hero-content">
       <div class="year-tag">2026</div>
-      <p class="pre-title">♪ 生日應援 ♪</p>
       <h1 class="main-title">生日快樂</h1>
       <div class="name-row">
         <div class="name-line"></div>
@@ -84,7 +83,9 @@ const desktopPhotos = DESKTOP_INDICES.map((i) => allPhotos[i]);
 const isDesktop = ref(window.innerWidth >= 600);
 
 /** 根據螢幕寬度決定輪播清單 */
-const heroPhotos = computed(() => (isDesktop.value ? desktopPhotos : allPhotos));
+const heroPhotos = computed(() =>
+  isDesktop.value ? desktopPhotos : allPhotos,
+);
 
 const currentIndex = ref(0);
 let timer = null;
@@ -120,7 +121,8 @@ const resumeAuto = () => {
 /** 切換上一張 */
 const prevPhoto = () => {
   currentIndex.value =
-    (currentIndex.value - 1 + heroPhotos.value.length) % heroPhotos.value.length;
+    (currentIndex.value - 1 + heroPhotos.value.length) %
+    heroPhotos.value.length;
 };
 
 /** 切換下一張 */
@@ -147,7 +149,8 @@ const onTouchEnd = (e) => {
     currentIndex.value = (currentIndex.value + 1) % heroPhotos.value.length;
   } else {
     currentIndex.value =
-      (currentIndex.value - 1 + heroPhotos.value.length) % heroPhotos.value.length;
+      (currentIndex.value - 1 + heroPhotos.value.length) %
+      heroPhotos.value.length;
   }
 };
 

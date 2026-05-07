@@ -39,7 +39,7 @@
       <!-- Google Maps -->
       <div class="map-wrapper map-anim" ref="mapRef">
         <iframe
-          src="https://maps.google.com/maps?q=25.04249,121.567815&z=15&output=embed"
+          src="https://maps.google.com/maps?q=Wannaeat+%E5%A5%BD%E6%83%B3%E5%90%83%E7%94%9C%E9%BB%9E%E5%B7%A5%E4%BD%9C%E5%AE%A4&z=17&output=embed"
           class="location-map"
           allowfullscreen
           loading="lazy"
