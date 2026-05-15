@@ -105,6 +105,7 @@ const onResize = () => {
 /** 跳至指定索引 */
 const jumpTo = (idx) => {
   currentIndex.value = idx;
+  paused = false;
 };
 
 /** hover 預覽：暫停自動輪播並切換 */
