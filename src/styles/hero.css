@@ -42,6 +42,7 @@
 .hero-overlay {
   position: absolute;
   inset: 0;
+  z-index: 2;
   background: linear-gradient(
     180deg,
     rgba(62, 39, 35, 0.5) 0%,
@@ -51,18 +52,30 @@
   );
 }
 
-/* 照片淡入淡出切換動畫 */
-.hero-fade-enter-active,
-.hero-fade-leave-active {
+/* 照片切換動畫：新圖在上方淡入，舊圖保持不透明直到被蓋住 */
+.hero-fade-enter-active {
   transition: opacity 1.4s ease;
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  z-index: 1;
 }
-.hero-fade-enter-from,
-.hero-fade-leave-to {
+.hero-fade-leave-active {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  animation: hero-photo-hold 1.4s ease forwards;
+}
+.hero-fade-enter-from {
   opacity: 0;
+}
+
+@keyframes hero-photo-hold {
+  from { opacity: 1; }
+  to   { opacity: 1; }
 }
 
 /* 主要文字區 */

@@ -9,7 +9,7 @@
         </p>
       </div>
 
-      <!-- 三個禮包品相 -->
+      <!-- 三個禮包品項 -->
       <div class="row q-col-gutter-lg q-mb-xl justify-center">
         <div v-for="gift in gifts" :key="gift.name" class="col-4">
           <q-card class="gift-card card-accent" flat>
@@ -70,7 +70,7 @@ const giftPhotos = Object.keys(giftModules)
   .sort()
   .map((k) => giftModules[k].default);
 
-/** 三個禮包品相 */
+/** 三個禮包品項 */
 const gifts = [
   { name: "包包", photo: giftPhotos[0] },
   { name: "明信片", photo: giftPhotos[1] },

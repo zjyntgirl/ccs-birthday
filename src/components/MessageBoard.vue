@@ -56,7 +56,7 @@
         v-if="messages.length === 0"
         class="text-center q-py-xl message-empty"
       >
-        還沒有留言，快來第一個留言吧 🎸
+        還沒有留言，快來第一個留言吧🍐
       </div>
 
       <transition-group name="msg-fade" tag="div" class="message-list">

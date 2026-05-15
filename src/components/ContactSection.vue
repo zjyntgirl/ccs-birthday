@@ -3,7 +3,8 @@
     <div class="contact-container q-mx-auto q-px-md">
       <div class="text-center q-mb-xl">
         <h2 class="section-title q-mb-sm">主辦團隊</h2>
-        <div class="title-bar q-mx-auto"></div>
+        <div class="title-bar q-mx-auto q-mb-md"></div>
+        <p class="section-subtitle">三亞渡假村</p>
       </div>
 
       <div class="row q-col-gutter-md justify-center" ref="cardsRef">

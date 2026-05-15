@@ -155,6 +155,11 @@ const onTouchEnd = (e) => {
 };
 
 onMounted(() => {
+  /** 預載所有照片，避免首次切換時露出背景 */
+  allPhotos.forEach((src) => {
+    const img = new Image();
+    img.src = src;
+  });
   window.addEventListener("resize", onResize);
   timer = setInterval(() => {
     if (!paused) {
