@@ -118,16 +118,28 @@ const resumeAuto = () => {
   paused = false;
 };
 
+/** 重置自動輪播計時器，手動操作後重新計時 */
+const resetTimer = () => {
+  clearInterval(timer);
+  timer = setInterval(() => {
+    if (!paused) {
+      currentIndex.value = (currentIndex.value + 1) % heroPhotos.value.length;
+    }
+  }, 4000);
+};
+
 /** 切換上一張 */
 const prevPhoto = () => {
   currentIndex.value =
     (currentIndex.value - 1 + heroPhotos.value.length) %
     heroPhotos.value.length;
+  resetTimer();
 };
 
 /** 切換下一張 */
 const nextPhoto = () => {
   currentIndex.value = (currentIndex.value + 1) % heroPhotos.value.length;
+  resetTimer();
 };
 
 /** 記錄觸控起始座標 */
@@ -152,6 +164,7 @@ const onTouchEnd = (e) => {
       (currentIndex.value - 1 + heroPhotos.value.length) %
       heroPhotos.value.length;
   }
+  resetTimer();
 };
 
 onMounted(() => {
