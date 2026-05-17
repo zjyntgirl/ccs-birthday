@@ -4,7 +4,7 @@
       <div class="text-center q-mb-xl">
         <h2 class="section-title q-mb-sm">出席調查</h2>
         <div class="title-bar q-mx-auto q-mb-md"></div>
-        <p class="section-subtitle">歡迎每位喜歡生哥的粉絲和我們共襄盛舉!</p>
+        <p class="section-subtitle">歡迎每位喜歡生哥的粉絲和我們共襄盛舉</p>
       </div>
 
       <q-card class="survey-card q-pa-lg" flat>
