@@ -64,7 +64,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import { db } from "../firebase";
-import { doc, onSnapshot, setDoc, increment, getDoc } from "firebase/firestore";
+import { doc, onSnapshot, setDoc, runTransaction, getDoc } from "firebase/firestore";
 
 /** 目前投票計數 */
 const counts = ref({ join: 0, notJoin: 0 });
@@ -77,30 +77,40 @@ const LOCAL_KEY = "ccs-survey-vote";
 let unsubscribe = null;
 
 /**
- * 執行投票，點相同選項不動作，點不同選項則切換。
+ * 執行投票，使用 Transaction 確保計數不會出現負數。
+ * 點相同選項不動作，點不同選項則切換。
  * @param {'join'|'notJoin'} option - 投票選項
  */
 async function vote(option) {
   const prev = userVote.value;
   if (prev === option) return;
 
-  const update = {};
-  if (prev) update[prev] = increment(-1);
-  update[option] = increment(1);
+  await runTransaction(db, async (transaction) => {
+    const snap = await transaction.get(SURVEY_DOC);
+    const data = snap.exists() ? snap.data() : { join: 0, notJoin: 0 };
 
-  await setDoc(SURVEY_DOC, update, { merge: true });
+    const update = { ...data };
+    // 扣除舊選項，但不低於 0
+    if (prev) update[prev] = Math.max(0, (update[prev] ?? 0) - 1);
+    update[option] = (update[option] ?? 0) + 1;
+
+    transaction.set(SURVEY_DOC, update);
+  });
+
   userVote.value = option;
   localStorage.setItem(LOCAL_KEY, option);
 }
 
 onMounted(async () => {
-  /** 讀取 localStorage，還原已投票狀態 */
-  userVote.value = localStorage.getItem(LOCAL_KEY);
+  const savedVote = localStorage.getItem(LOCAL_KEY);
 
-  /** 若 Firestore 文件尚未建立，先初始化 */
+  /** 若 Firestore 文件不存在，代表資料已重置，清除 localStorage 避免計數錯誤 */
   const snap = await getDoc(SURVEY_DOC);
   if (!snap.exists()) {
     await setDoc(SURVEY_DOC, { join: 0, notJoin: 0 });
+    localStorage.removeItem(LOCAL_KEY);
+  } else {
+    userVote.value = savedVote;
   }
 
   /** 即時監聽投票數變化 */
